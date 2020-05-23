@@ -2,7 +2,7 @@
 
 *This package is under active development*
 
-Design safe controllers for nonlinear systems in the presence of disturbances. The controllers ensure that the system state remains in a adjustable *safe tube* around the desired state. Find out more about it in our [paper](https://github.com/arlk/SafeFeedbackMotionPlanning/blob/master/arxiv.pdf):
+Design safe controllers for nonlinear systems in the presence of disturbances. The controllers ensure that the system state remains in a tunable *safe tube* around the desired state. Find out more about it in our [paper](https://github.com/arlk/SafeFeedbackMotionPlanning/blob/master/arxiv.pdf):
 ```
 @article{lakshmanan2020safe,
   title={Safe Feedback Motion Planning: A Contraction Theory and $\mathcal{L}_1$-Adaptive Control Based Approach},
@@ -12,15 +12,15 @@ Design safe controllers for nonlinear systems in the presence of disturbances. T
 }
 ```
 ## Problem Formulation
-Designing controllers for a system of the form
+Consider a system of the form
 ```julia
 ẋ = f(x) + B(x)u
 ```
-which is facing disturbances (both state and time dependent) that is matched with the control channel:
+where `x(t), f(x) ∈ ℝⁿ`, `u(t) ∈ ℝᵐ`, and `B(x) ∈ ℝⁿˣᵐ`, that is facing disturbances `h(t,x)  ∈ ℝᵐ` (either/both state and time dependent) that is matched with the control channel:
 ```julia
 ẋ = f(x) + B(x)(u + h(t,x))
 ```
-Given a desired state-control trajectory pair `(x*,u*)` (feasible under the nominal system) that the actual system is required to follow, design a controller `u(t)` such that the states are required to remain inside a tube `Ω(ρ, x*(t)) = {ℝⁿ : ||y - x*(t)|| ≤ ρ}` of some user defined width `ρ`.
+Given a desired state-control trajectory pair `(x*,u*)` (feasible under the nominal system) that the actual system is required to follow, design a controller `u(t)` such that the states remain inside a tube `Ω(ρ, x*(t)) = {ℝⁿ : ||y - x*(t)|| ≤ ρ}` of some user defined width `ρ > 0`.
 
 In this package you can design controllers to do exactly this! A more in-depth review of the control architecture can be found in the paper.
 
