@@ -3,8 +3,6 @@ using DifferentialEquations
 using Plots
 using LinearAlgebra
 
-include("traj.jl")
-
 # System
 f(x) = [-x[1] + 2*x[2];
         -0.25*x[2]^3 - 3*x[1] + 4*x[2]]
@@ -29,6 +27,7 @@ h(t, x) = -2*sin(2*t) -0.01*x'*x
 Γ = 4e7
 
 ############### Generating Feasible Desired Trajectory
+include("traj.jl")
 function TO.dynamics(model::SinghICRA, x, u)
     f(x) + B*u[1]
 end
