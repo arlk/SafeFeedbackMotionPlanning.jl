@@ -8,7 +8,7 @@ function energy(c, T, Ts, weights, W)
     E = 0.0
     x = c*T
     γs = c*Ts
-    for k = 1:length(weights)
+    @inbounds for k = 1:length(weights)
         xv = view(x,:,k)
         γsv = view(γs,:,k)
         E += γsv'*(W(xv)\γsv)*weights[k]
@@ -27,6 +27,10 @@ function _u_ccm(x, sys, ccm::CCMParams, t)
 
     xt = xs(t)
     ut = us(t)
+
+    ## For parallelism it will be better to initialize γ
+    #  γf(s) = xt*(1-s) .+ ForwardDiff.value.(x)*s
+    #  γ0 = hcat(γf.(n[2:end-1])...)
 
     # For why ForwardDiff.value.(x) is used, see: https://discourse.julialang.org/t/a-hacky-guide-to-using-automatic-differentiation-in-nested-optimization-problems/39123
     obj(γ) = energy(γ, xt, ForwardDiff.value.(x), A, T, Ts, w, W)
