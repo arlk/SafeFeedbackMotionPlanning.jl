@@ -5,7 +5,7 @@
 Design safe controllers for nonlinear systems in the presence of disturbances. The controllers ensure that the system state remains in a adjustable *safe tube* around the desired state. Find out more about it in our [paper](https://github.com/arlk/SafeFeedbackMotionPlanning/blob/master/arxiv.pdf):
 ```
 @article{lakshmanan2020safe,
-  title={Safe Feedback Motion Planning: A Contraction Theory and $$\backslash$mathcal $\{$L$\}$ \_1 $-Adaptive Control Based Approach},
+  title={Safe Feedback Motion Planning: A Contraction Theory and $\mathcal{L}_1$-Adaptive Control Based Approach},
   author={Lakshmanan, Arun and Gahlawat, Aditya and Hovakimyan, Naira},
   journal={arXiv preprint arXiv:2004.01142},
   year={2020}
