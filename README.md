@@ -55,7 +55,7 @@ x0 = [1.0, -1.0]
 xs = [0.0, 0.0]
 us = 0.0
 
-# Control Contraction Metric
+# Dual of the control contraction metric matrix (or as a function if state-dependent)
 W = [4.25828 -0.93423; -0.93423 3.76692]
 λ = 1.74
 
@@ -63,7 +63,7 @@ W = [4.25828 -0.93423; -0.93423 3.76692]
 h(t, x) = -2*sin(2*t) -0.01*x'*x
 
 # Upper bound on the norm of the uncertainty
-# for any x ∈ Ω(ρ) and t ≥ 0 (see paper for more details)
+# for any x ∈ Ω(ρ = √2) and t ≥ 0 (see paper for more details).
 Δh = 2.1
 ω = 90
 Γ = 4e7
