@@ -42,12 +42,13 @@ function _u_ccm(x, sys, ccm::CCMParams, t)
 
     γs1 = c*(@view Ts[:,end])
     γs0 = c*(@view Ts[:,1])
-    lhs = 2*γs1'*(W(x)\B(x))
+    lhs = 2*(W(x)\B(x))'*γs1
+    nlhs = sum(abs2, lhs)
     rhs = -2*λ*E - 2*γs1'*(W(x)\(f(x) + B(x)*ut)) + 2*γs0'*(W(xt)\(f(xt) + B(xt)*ut))
-    if (rhs > 0) || (norm(lhs) == 0)
+    if (rhs > 0) || (nlhs == 0)
         return ut
     else
-        return ut + rhs/(lhs'*lhs)*lhs
+        return ut + rhs*lhs/nlhs
     end
 end
 
@@ -58,11 +59,12 @@ function _u_ccm(x, sys, ccm::FlatCCMParams, t)
     ut = us(t)
     γs = x - xt
     E = γs'*M*γs
-    lhs = 2*γs'*M*B(x)
+    lhs = 2*B(x)'*M*γs
+    nlhs = sum(abs2, lhs)
     rhs = -2*λ*E - 2*γs'*M*(f(x) - f(xt) + (B(x) - B(xt))*ut)
-    if (rhs > 0) || (norm(lhs) == 0)
+    if (rhs > 0) || (nlhs == 0)
         return ut
     else
-        return ut + rhs/(lhs'*lhs)*lhs
+        return ut + rhs*lhs/nlhs
     end
 end
