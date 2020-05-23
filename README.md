@@ -14,13 +14,13 @@ Design safe controllers for nonlinear systems in the presence of disturbances. T
 ## Problem Formulation
 Designing controllers for a system of the form
 ```julia
-ẋ = f(x) + B(x)u,
+ẋ = f(x) + B(x)u
 ```
 which is facing disturbances (both state and time dependent) that is matched with the control channel:
 ```julia
-ẋ = f(x) + B(x)(u + h(t,x)).
+ẋ = f(x) + B(x)(u + h(t,x))
 ```
-Given a desired state-control trajectory pair `(x*,u*)` (feasible under the nominal system) that the actual system is required to follow, design a controller `u(t)` such that the states are required to remain inside a tube `Ω(ρ, x*(t)) = {ℝⁿ : ||y - x*|| ≤ ρ}` of some user defined width `ρ`.
+Given a desired state-control trajectory pair `(x*,u*)` (feasible under the nominal system) that the actual system is required to follow, design a controller `u(t)` such that the states are required to remain inside a tube `Ω(ρ, x*(t)) = {ℝⁿ : ||y - x*(t)|| ≤ ρ}` of some user defined width `ρ`.
 
 In this package you can design controllers to do exactly this! A more in-depth review of the control architecture can be found in the paper.
 
@@ -98,6 +98,7 @@ p4 = plot(l1_sol, vars=[(0,1),(0,2)], title="L1+CCM with perturbations", legend=
 plot(p1, p2, p3, p4, layout=l)
 ```
 
+![](https://github.com/arlk/SafeFeedbackMotionPlanning.jl/raw/master/examples/readme_ex.png)
 
 ## TODO
  - CCM metric search using SumofSquares.jl
